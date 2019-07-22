@@ -1,0 +1,35 @@
+<div class="general-block-decorator">
+    <div class="row">
+
+        <div class="col-md-12 title title-without-tabs">
+            {intl l='robot.title' d='editrobottxt.bo.default'}
+        </div>
+
+        <div class="form-container">
+            <div class="col-md-12">
+                {if file_exists('robots.txt')}
+                <span style="font-size: 30px; color: red;">
+                    {intl l='robot.help' d='editrobottxt.bo.default'}
+                </span>
+                {/if}
+                {form name = "editrobottxt.configuration"}
+                <form method="POST" action="{url path="/admin/module/editrobottxt/cofiguration"}" >
+                {form_hidden_fields}
+
+                {form_tagged_fields tag="robot"}
+                <div class="form-group {if $error}has-error{/if} col-md-4 ">
+
+                    <label>{$attr_list.domain}</label>
+                    <textarea id="robotTextArea" name="{$name}" class="form-control" style="height: 400px; width: 500px" title="{$label}">{$value}</textarea>
+
+
+                    <button type="submit" class="form-submit-button btn btn-default" >{intl l='robot.button' d='editrobottxt.bo.default'}</button>
+
+                </div>
+                {/form_tagged_fields}
+                </form>
+                {/form}
+            </div>
+        </div>
+    </div>
+</div>
