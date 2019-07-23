@@ -19,16 +19,7 @@ composer require your-vendor/edit-robot-txt-module:~1.0
 
 ## Usage
 
-* After installation, be sure that ```robots``` table is create like :
-
-         CREATE TABLE `robots`
-         (
-             `id` INTEGER NOT NULL AUTO_INCREMENT,
-             `domain_name` VARCHAR(255) NOT NULL,
-             `robots_content` TEXT NOT NULL,
-             PRIMARY KEY (`id`)
-         );        
-* Delete your ```robots.txt```.
+* After installation go to ```Modules``` to activate it and delete the ```robots.txt``` file in ```web``` folder.
 
 
 

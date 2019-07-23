@@ -1,10 +1,12 @@
 {
-  "name": "your-vendor/edit-robot-txt-module",
-  "license": "LGPL-3.0+",
+  "name": "thelia/edit-robot-txt-module",
   "type": "thelia-module",
-  "require": {
-    "thelia/installer": "~1.1"
-  },
+  "authors": [
+    {
+      "name": "Nicolas Barbey",
+      "email": "nbarbey@openstudio.fr"
+    }
+  ],
   "extra": {
     "installer-name": "EditRobotTxt"
   }
