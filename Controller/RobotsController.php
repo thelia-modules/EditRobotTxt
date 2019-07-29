@@ -10,10 +10,10 @@ namespace EditRobotTxt\Controller;
 
 
 use EditRobotTxt\Model\RobotsQuery;
-use Thelia\Controller\Admin\BaseAdminController;
-use Thelia\Controller\BaseController;
+use Symfony\Component\HttpFoundation\Response;
+use Thelia\Controller\Front\BaseFrontController;
 
-class RobotsController extends BaseAdminController
+class RobotsController extends BaseFrontController
 {
     public function getAction()
     {
@@ -21,8 +21,7 @@ class RobotsController extends BaseAdminController
 
         $robot = RobotsQuery::create()->findOneByDomainName($domain);
 
-
-        return $this->render('robots_txt',['content'=>$robot->getRobotsContent()]);
+        return new Response($robot->getRobotsContent(), 200, ["Content-Type" => "text/plain; charset=utf-8"]);
     }
 
 }
