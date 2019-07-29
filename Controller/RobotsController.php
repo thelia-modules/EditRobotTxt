@@ -21,7 +21,7 @@ class RobotsController extends BaseFrontController
 
         $robot = RobotsQuery::create()->findOneByDomainName($domain);
 
-        return new Response($robot->getRobotsContent(),200, ["Content-Type" => "text/plain; charset=utf-8"]);
+        return new Response($robot->getRobotsContent(), 200, ["Content-Type" => "text/plain; charset=utf-8"]);
     }
 
 }
