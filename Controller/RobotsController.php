@@ -19,12 +19,12 @@ class RobotsController extends BaseFrontController
     {
         $domain = $this->getRequest()->getHttpHost();
 
-        $robot = RobotsQuery::create()->findOneByDomainName('http://'.$domain);
+        $robot = RobotsQuery::create()->findOneByDomainName('http://' . $domain);
         if ($robot === null){
-            $robot = RobotsQuery::create()->findOneByDomainName('https://'.$domain);
+            $robot = RobotsQuery::create()->findOneByDomainName('https://' . $domain);
         }
 
-        return new Response($robot->getRobotsContent(),200, ["Content-Type" => "text/plain; charset=utf-8"]);
+        return new Response($robot->getRobotsContent(), 200, ["Content-Type" => "text/plain; charset=utf-8"]);
     }
 
 }
