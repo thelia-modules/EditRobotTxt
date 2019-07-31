@@ -14,6 +14,13 @@
                 {/if}
                 {form name = "editrobottxt.configuration"}
                 <form method="POST" action="{url path="/admin/module/editrobottxt/cofiguration"}" >
+
+                {include file = "includes/inner-form-toolbar.html"
+                hide_flags = true
+                page_url   = "{url path='/admin/module/EditRobotTxt'}"
+                close_url  = "{url path='/admin/modules'}"
+                }
+
                 {form_hidden_fields}
 
                 {form_tagged_fields tag="robot"}
@@ -21,9 +28,6 @@
 
                     <label>{$attr_list.domain}</label>
                     <textarea id="robotTextArea" name="{$name}" class="form-control" style="height: 400px; width: 500px" title="{$label}">{$value}</textarea>
-
-
-                    <button type="submit" class="form-submit-button btn btn-default" >{intl l='robot.button' d='editrobottxt.bo.default'}</button>
 
                 </div>
                 {/form_tagged_fields}
