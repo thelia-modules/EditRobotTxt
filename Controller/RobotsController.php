@@ -11,14 +11,15 @@ namespace EditRobotTxt\Controller;
 
 use EditRobotTxt\Model\RobotsQuery;
 use mysql_xdevapi\Exception;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Thelia\Controller\Front\BaseFrontController;
 
 class RobotsController extends BaseFrontController
 {
-    public function getAction()
+    public function getAction(RequestStack $requestStack)
     {
-        $domain = $this->getRequest()->getHttpHost();
+        $domain = $requestStack->getCurrentRequest()->getHttpHost();
 
         $robot = RobotsQuery::create()->findOneByDomainName('http://' . $domain);
         if ($robot === null){

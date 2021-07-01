@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://thelia.net/schema/dic/config http://thelia.net/schema/dic/config/thelia-1.0.xsd">
 
     <forms>
-        <form name="editrobottxt.configuration" class="EditRobotTxt\Form\EditForm" />
+        <form name="editrobottxt_configuration" class="EditRobotTxt\Form\EditForm" />
     </forms>
 
     <hooks>

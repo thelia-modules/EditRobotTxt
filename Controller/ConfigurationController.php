@@ -13,20 +13,21 @@ use Composer\EventDispatcher\Event;
 use EditRobotTxt\Form\EditForm;
 use EditRobotTxt\Model\Robots;
 use EditRobotTxt\Model\RobotsQuery;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Thelia\Controller\Admin\BaseAdminController;
 use Thelia\Core\Event\TheliaEvents;
 use Thelia\Form\Lang\LangUrlEvent;
+use Thelia\Tools\URL;
 
 class ConfigurationController extends BaseAdminController
 {
     /**
-     * @return null|\Thelia\Core\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\Response|null
      * @throws \Propel\Runtime\Exception\PropelException
      */
     public function editAction()
     {
-        $form = new EditForm($this->getRequest());
-        $response = null;
+        $form = $this->createForm(EditForm::getName());
 
         $configForm = $this->validateForm($form);
 
@@ -38,10 +39,6 @@ class ConfigurationController extends BaseAdminController
             }
         }
 
-        $response = $this->render(
-            'module-configure',
-            ['module_code' => 'EditRobotTxt']
-        );
-        return $response;
+        return $this->generateRedirect(URL::getInstance()->absoluteUrl('/admin/module/EditRobotTxt'));
     }
 }
