@@ -1,29 +1,23 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nicolasbarbey
- * Date: 19/07/2019
- * Time: 12:04
- */
 
 namespace EditRobotTxt\Controller;
 
 
-use Composer\EventDispatcher\Event;
 use EditRobotTxt\Form\EditForm;
-use EditRobotTxt\Model\Robots;
 use EditRobotTxt\Model\RobotsQuery;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Thelia\Controller\Admin\BaseAdminController;
-use Thelia\Core\Event\TheliaEvents;
-use Thelia\Form\Lang\LangUrlEvent;
 use Thelia\Tools\URL;
+use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/admin/module/editrobottxt/cofiguration", name="editrobottxt_cofiguration")
+ */
 class ConfigurationController extends BaseAdminController
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response|null
      * @throws \Propel\Runtime\Exception\PropelException
+     * @Route("", name="_cofiguration", methods="POST")
      */
     public function editAction()
     {

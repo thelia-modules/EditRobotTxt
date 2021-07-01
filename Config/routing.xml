@@ -27,12 +27,12 @@
     ...
     </route>
     -->
-    <route id="edit.robot_txt.configuration" path="/admin/module/editrobottxt/cofiguration" methods="post">
+    <!--<route id="edit.robot_txt.configuration" path="/admin/module/editrobottxt/cofiguration" methods="post">
         <default key="_controller">EditRobotTxt\Controller\ConfigurationController::editAction</default>
     </route>
 
-    <route id="set.robot.txt" path="/robots.txt" methods="get">
+    <route id="set.robot.txt" path="" methods="get">
         <default key="_controller">EditRobotTxt\Controller\RobotsController::getAction</default>
-    </route>
+    </route>-->
 
 </routes>
