@@ -15,6 +15,7 @@ namespace EditRobotTxt;
 use EditRobotTxt\Model\Robots;
 use EditRobotTxt\Model\RobotsQuery;
 use Propel\Runtime\Connection\ConnectionInterface;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
 use Thelia\Install\Database;
 use Thelia\Model\LangQuery;
 use Thelia\Module\BaseModule;
@@ -28,7 +29,7 @@ class EditRobotTxt extends BaseModule
      * @param ConnectionInterface|null $con
      * @throws \Propel\Runtime\Exception\PropelException
      */
-    public function postActivation(ConnectionInterface $con = null)
+    public function postActivation(ConnectionInterface $con = null): void
     {
         try {
             RobotsQuery::create()->findOne();
@@ -61,5 +62,12 @@ class EditRobotTxt extends BaseModule
                     ->save();
             }
         }
+    }
+    public static function configureServices(ServicesConfigurator $servicesConfigurator): void
+    {
+        $servicesConfigurator->load(self::getModuleCode().'\\', __DIR__)
+            ->exclude([THELIA_MODULE_DIR . ucfirst(self::getModuleCode()). "/I18n/*"])
+            ->autowire(true)
+            ->autoconfigure(true);
     }
 }

@@ -12,6 +12,7 @@ namespace EditRobotTxt\Form;
 
 use EditRobotTxt\Model\Robots;
 use EditRobotTxt\Model\RobotsQuery;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Thelia\Form\BaseForm;
 
 class EditForm extends BaseForm
@@ -23,7 +24,7 @@ class EditForm extends BaseForm
         $form = $this->formBuilder;
         /** @var Robots $domain */
         foreach (RobotsQuery::create()->find() as $domain){
-            $form->add($domain->getId(),'text',[
+            $form->add($domain->getId(),TextType::class,[
                 'data' => $domain->getRobotsContent(),
                 'attr' => array(
                     'tag' => 'robot',
@@ -33,9 +34,9 @@ class EditForm extends BaseForm
         }
     }
 
-    public function getName()
+    public static function getName()
     {
-        return 'edit_robot_txt_configuration';
+        return 'editrobottxt_configuration';
     }
 
 }
