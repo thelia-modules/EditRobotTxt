@@ -13,7 +13,7 @@
                 </span>
                 {/if}
                 {form name = "editrobottxt.configuration"}
-                <form method="POST" action="{url path="/admin/module/editrobottxt/cofiguration"}" >
+                <form method="POST" action="{url path="/admin/module/EditRobotTxt/configure"}" >
 
                 {include file = "includes/inner-form-toolbar.html"
                 hide_flags = true
@@ -22,16 +22,20 @@
                 close_url  = "{url path='/admin/modules'}"
                 }
 
-                {form_hidden_fields}
-
-                {form_tagged_fields tag="robot"}
+                {form_hidden_fields form=$form}
                 <div class="form-group {if $error}has-error{/if} col-md-4 ">
-
-                    <label>{$attr_list.domain}</label>
-                    <textarea id="robotTextArea" name="{$name}" class="form-control" style="height: 400px; width: 500px" title="{$label}">{$value}</textarea>
-
+                    {$index = 1}
+                    {foreach from=$config item="conf"}
+                        {form_field form=$form field= domain_name1}
+                            <label>{$conf.0}</label>
+                            <input type="text" id="domain_name{$index}" name="edit_robot_txt_configuration[domain_name{$index}]" class="form-control" style="width: 500px" value="{$conf.0}" \>
+                        {/form_field}
+                        {form_field form=$form field= content1}
+                            <textarea id="robotTextArea" id="content{$index}" name="edit_robot_txt_configuration[content{$index}]" class="form-control" style="height: 400px; width: 500px" title="{$label}">{$conf.1}</textarea>
+                        {/form_field}
+                        {$index = $index + 1}
+                   {/foreach}
                 </div>
-                {/form_tagged_fields}
                 </form>
                 {/form}
             </div>
