@@ -21,19 +21,20 @@
                     close_url  = "{url path='/admin/modules'}"
                     }
                     {form_hidden_fields form=$form}
-                    <div class="form-group {if $error|default:null}has-error{/if} col-md-4 ">
-                        {$index = 1}
-                        {foreach from=$config item="conf"}
-                            {form_field form=$form field="domain_name{$index}"}
-                                <label>{$conf.0}</label>
-                                <input type="text" id="domain_name{$index}" name="{$name}" class="form-control" style="width: 500px" value="{$conf.0}" \>
+                    {$index = 1}
+                    {foreach from=$config item="conf"}
+                        <div class="form-group {if $error|default:null}has-error{/if} col-md-4 ">
+                            {form_field form=$form field="DomainName_{$index}"}
+                                <label>Nom de domaine</label>
+                                <input type="text" id="{$name}" name="{$name}" class="form-control" style="width: 500px" value="{$conf.0}" \>
                             {/form_field}
-                            {form_field form=$form field="content{$index}"}
-                                <textarea id="robotTextArea" id="content{$index}" name="{$name}" class="form-control" style="height: 400px; width: 500px" title="{$label}">{$conf.1}</textarea>
+                            {form_field form=$form field="RobotsContent_{$index}"}
+                                <label>Contenu du fichier</label>
+                                <textarea id="robotTextArea" id="{$name}" name="{$name}" class="form-control" style="height: 400px; width: 500px" title="{$label}">{$conf.1}</textarea>
                             {/form_field}
                             {$index = $index + 1}
-                        {/foreach}
-                    </div>
+                        </div>
+                    {/foreach}
                 </form>
                 {/form}
             </div>
