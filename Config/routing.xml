@@ -27,7 +27,7 @@
     ...
     </route>
     -->
-    <!--<route id="edit.robot_txt.configuration" path="/admin/module/editrobottxt/cofiguration" methods="post">
+    <!--<route id="edit.robot_txt.configuration" path="/admin/module/editrobottxt/configuration" methods="post">
         <default key="_controller">EditRobotTxt\Controller\ConfigurationController::editAction</default>
     </route>
 

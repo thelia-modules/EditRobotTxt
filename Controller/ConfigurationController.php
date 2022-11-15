@@ -10,14 +10,14 @@ use Thelia\Tools\URL;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/module/editrobottxt/cofiguration", name="editrobottxt_cofiguration")
+ * @Route("/admin/module/EditRobotTxt/configuration", name="editrobottxt_configuration")
  */
 class ConfigurationController extends BaseAdminController
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response|null
      * @throws \Propel\Runtime\Exception\PropelException
-     * @Route("", name="_cofiguration", methods="POST")
+     * @Route("", name="_configuration", methods="POST")
      */
     public function editAction()
     {
@@ -25,10 +25,12 @@ class ConfigurationController extends BaseAdminController
 
         $configForm = $this->validateForm($form);
 
-        foreach ($configForm->getData() as $id => $data){
-            if (is_int($id)){
+        foreach ($configForm->getData() as $fieldNameAndId => $data){
+            if (!in_array($fieldNameAndId, ['success_url', 'error_url', 'error_message']) ){
+                list($fieldName, $id) = explode('_', $fieldNameAndId);
+                $setter = "set".$fieldName;
                 $robot = RobotsQuery::create()->findOneById($id);
-                $robot->setRobotsContent($data);
+                $robot->$setter($data);
                 $robot->save();
             }
         }
