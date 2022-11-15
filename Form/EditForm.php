@@ -24,14 +24,14 @@ class EditForm extends BaseForm
         /** @var Robots $domain */
         foreach (RobotsQuery::create()->find() as $domain){
             $form
-                ->add('content' . $domain->getId(),'text',[
+                ->add('RobotsContent_' . $domain->getId(),'text',[
                     'data' => $domain->getRobotsContent(),
                     'attr' => array(
                         'tag' => 'robot',
                         'domain' => $domain->getDomainName()
                     )
                 ])
-                ->add('domain_name' . $domain->getId(),'text',[
+                ->add('DomainName_' . $domain->getId(),'text',[
                     'data' => $domain->getDomainName(),
                     'attr' => array(
                         'tag' => 'domain',

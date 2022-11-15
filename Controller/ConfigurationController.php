@@ -32,27 +32,16 @@ class ConfigurationController extends BaseAdminController
         $response = null;
 
         $configForm = $this->validateForm($form);
-        $indexC = 1;
-        $indexD = 1;
 
-        $config = [];
-
-        foreach ($configForm->getData() as $id => $data){
-            if (strcmp('content'.$indexC, $id) == 0){
-                $robot = RobotsQuery::create()->findOneById($indexC);
-                $robot->setRobotsContent($data);
+        foreach ($configForm->getData() as $fieldNameAndId => $data){
+            if (!in_array($fieldNameAndId, ['success_url', 'error_url', 'error_message']) ){
+                list($fieldName, $id) = explode('_', $fieldNameAndId);
+                $setter = "set".$fieldName;
+                $robot = RobotsQuery::create()->findOneById($id);
+                $robot->$setter($data);
                 $robot->save();
-                $config[$indexC][0] = $data;
-                $indexC += 1;
-            } elseif (strcmp('domain_name'.$indexD, $id) == 0){
-                $robot = RobotsQuery::create()->findOneById($indexD);
-                $robot->setDomainName($data);
-                $robot->save();
-                $config[$indexD][1] = $data;
-                $indexD += 1;
             }
         }
-
         return $this->generateRedirect(URL::getInstance()->absoluteUrl('/admin/module/EditRobotTxt'));
     }
 }
