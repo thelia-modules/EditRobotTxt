@@ -24,13 +24,20 @@ class EditForm extends BaseForm
         $form = $this->formBuilder;
         /** @var Robots $domain */
         foreach (RobotsQuery::create()->find() as $domain){
-            $form->add($domain->getId(),TextType::class,[
-                'data' => $domain->getRobotsContent(),
-                'attr' => array(
-                    'tag' => 'robot',
-                    'domain' => $domain->getDomainName()
-                )
-            ]);
+            $form->add('content' . $domain->getId(),TextType::class,[
+                    'data' => $domain->getRobotsContent(),
+                    'attr' => array(
+                        'tag' => 'robot',
+                        'domain' => $domain->getDomainName()
+                    )
+                ])
+                ->add('domain_name' . $domain->getId(),TextType::class,[
+                    'data' => $domain->getDomainName(),
+                    'attr' => array(
+                        'tag' => 'domain',
+                        'domain' => $domain->getDomainName()
+                    )
+                ]);
         }
     }
 

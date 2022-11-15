@@ -13,25 +13,27 @@
                 </span>
                 {/if}
                 {form name = "editrobottxt_configuration"}
-                <form method="POST" action="{url path="/admin/module/editrobottxt/cofiguration"}" >
-
-                {include file = "includes/inner-form-toolbar.html"
-                hide_flags = true
-                hide_save_and_close_button = true
-                page_url   = "{url path='/admin/module/EditRobotTxt'}"
-                close_url  = "{url path='/admin/modules'}"
-                }
-
-                {form_hidden_fields}
-
-                {form_tagged_fields tag="robot"}
-                <div class="form-group {if $error}has-error{/if} col-md-4 ">
-
-                    <label>{$attr_list.domain}</label>
-                    <textarea id="robotTextArea" name="{$name}" class="form-control" style="height: 400px; width: 500px" title="{$label}">{$value}</textarea>
-
-                </div>
-                {/form_tagged_fields}
+                <form method="POST" action="{url path="/admin/module/EditRobotTxt/configuration"}" >
+                    {include file = "includes/inner-form-toolbar.html"
+                    hide_flags = true
+                    hide_save_and_close_button = true
+                    page_url   = "{url path='/admin/module/EditRobotTxt'}"
+                    close_url  = "{url path='/admin/modules'}"
+                    }
+                    {form_hidden_fields form=$form}
+                    <div class="form-group {if $error|default:null}has-error{/if} col-md-4 ">
+                        {$index = 1}
+                        {foreach from=$config item="conf"}
+                            {form_field form=$form field="domain_name{$index}"}
+                                <label>{$conf.0}</label>
+                                <input type="text" id="domain_name{$index}" name="{$name}" class="form-control" style="width: 500px" value="{$conf.0}" \>
+                            {/form_field}
+                            {form_field form=$form field="content{$index}"}
+                                <textarea id="robotTextArea" id="content{$index}" name="{$name}" class="form-control" style="height: 400px; width: 500px" title="{$label}">{$conf.1}</textarea>
+                            {/form_field}
+                            {$index = $index + 1}
+                        {/foreach}
+                    </div>
                 </form>
                 {/form}
             </div>
