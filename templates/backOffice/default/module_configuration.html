@@ -13,7 +13,7 @@
                 </span>
                 {/if}
                 {form name = "editrobottxt.configuration"}
-                <form method="POST" action="{url path="/admin/module/editrobottxt/cofiguration"}" >
+                <form method="POST" action="{url path="/admin/module/EditRobotTxt/configure"}" >
 
                 {include file = "includes/inner-form-toolbar.html"
                 hide_flags = true
@@ -22,16 +22,21 @@
                 close_url  = "{url path='/admin/modules'}"
                 }
 
-                {form_hidden_fields}
-
-                {form_tagged_fields tag="robot"}
-                <div class="form-group {if $error}has-error{/if} col-md-4 ">
-
-                    <label>{$attr_list.domain}</label>
-                    <textarea id="robotTextArea" name="{$name}" class="form-control" style="height: 400px; width: 500px" title="{$label}">{$value}</textarea>
-
-                </div>
-                {/form_tagged_fields}
+                {form_hidden_fields form=$form}
+                    {$index = 1}
+                    {foreach from=$config item="conf"}
+                    <div class="form-group {if $error}has-error{/if} col-md-4 ">
+                        {form_field form=$form field="DomainName_{$index}"}
+                            <label>Nom de domaine</label>
+                            <input type="text" id="{$name}" name="{$name}" class="form-control" style="width: 500px" value="{$conf.0}" \>
+                        {/form_field}
+                        {form_field form=$form field="RobotsContent_{$index}"}
+                            <label>Contenu du fichier</label>
+                            <textarea id="robotTextArea" id="{$name}" name="{$name}" class="form-control" style="height: 400px; width: 500px" title="{$label}">{$conf.1}</textarea>
+                        {/form_field}
+                        {$index = $index + 1}
+                    </div>
+                   {/foreach}
                 </form>
                 {/form}
             </div>

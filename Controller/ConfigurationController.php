@@ -16,11 +16,14 @@ use EditRobotTxt\Model\RobotsQuery;
 use Thelia\Controller\Admin\BaseAdminController;
 use Thelia\Core\Event\TheliaEvents;
 use Thelia\Form\Lang\LangUrlEvent;
+use Thelia\Tools\URL;
+use function Clue\StreamFilter\append;
+use function Sodium\add;
 
 class ConfigurationController extends BaseAdminController
 {
     /**
-     * @return null|\Thelia\Core\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\Response|null
      * @throws \Propel\Runtime\Exception\PropelException
      */
     public function editAction()
@@ -30,18 +33,15 @@ class ConfigurationController extends BaseAdminController
 
         $configForm = $this->validateForm($form);
 
-        foreach ($configForm->getData() as $id => $data){
-            if (is_int($id)){
+        foreach ($configForm->getData() as $fieldNameAndId => $data){
+            if (!in_array($fieldNameAndId, ['success_url', 'error_url', 'error_message']) ){
+                list($fieldName, $id) = explode('_', $fieldNameAndId);
+                $setter = "set".$fieldName;
                 $robot = RobotsQuery::create()->findOneById($id);
-                $robot->setRobotsContent($data);
+                $robot->$setter($data);
                 $robot->save();
             }
         }
-
-        $response = $this->render(
-            'module-configure',
-            ['module_code' => 'EditRobotTxt']
-        );
-        return $response;
+        return $this->generateRedirect(URL::getInstance()->absoluteUrl('/admin/module/EditRobotTxt'));
     }
 }
