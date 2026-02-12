@@ -15,18 +15,21 @@ use Thelia\Core\Hook\BaseHook;
 
 class ConfigurationHook extends BaseHook
 {
-    public function onModuleConfiguration(HookRenderEvent $event){
+    public function onModuleConfiguration(HookRenderEvent $event): void
+    {
         $config = [];
 
         $robots = RobotsQuery::create()->find();
-        $index = 1;
-        foreach ($robots as $robot){
-            $config[$index][0] = $robot->getDomainName();
-            $config[$index][1] = $robot->getRobotsContent();
-            $index += 1;
+        foreach ($robots as $robot) {
+            $config[] = [
+                'id' => $robot->getId(),
+                'domain' => $robot->getDomainName(),
+                'content' => $robot->getRobotsContent(),
+            ];
         }
-        $event->add($this->render("module_configuration.html",
-            ['config' => $config]
-        ));
+
+        $event->add($this->render("module_configuration.html", [
+            'config' => $config
+        ]));
     }
 }
